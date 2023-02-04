@@ -63,5 +63,6 @@ public class Car {
             }
         }
         this.dominationCount = x;
+
     }
 }
