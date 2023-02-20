@@ -103,7 +103,7 @@ class CarTest {
     @Order(6)
     public void testSortingPolicyforMileageInDescendingOrder() {
 
-        List<Car> sortDesc = CarsList.stream().sorted(Comparator.comparing((Car car) -> car.getPrice(), Comparator.reverseOrder())).collect(Collectors.toList());
+        List<Car> sortDesc = CarsList.stream().sorted(Comparator.comparing((Car car) -> car.getMileage(), Comparator.reverseOrder())).collect(Collectors.toList());
         List<String> makeDesc = sortDesc.stream().map(Car::getMake).collect(Collectors.toList());
         List<Integer> mileageDesc = sortDesc.stream().map(Car::getMileage).collect(Collectors.toList());
 
