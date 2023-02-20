@@ -31,6 +31,7 @@ class CarTest {
 
 
     //Price Sorting Policy
+
     @Test
     @Order(1)
     public void testSortingPolicyforPricesInAscendingOrder() {
@@ -58,6 +59,7 @@ class CarTest {
     }
 
     //Year Sorting Policy
+
     @Test
     @Order(3)
     public void testSortingPolicyforYearInAscendingOrder() {
@@ -208,6 +210,9 @@ class CarTest {
         System.out.println("\nPartitioning Low Domination Cars having Domination < 500000: "+lowDom);
     }
 
+
+    //Averaging the price of each group of cars Using groupingBy
+
     @Test
     @Order(17)
     public void testCarbyAveragingValues(){
@@ -216,11 +221,14 @@ class CarTest {
         System.out.println("\nAveraging Price for each car maker: "+groupavgPriceByMaker);
     }
 
+    //Min and Max Values for each sorting policy groups
+
     @Test
     @Order(18)
     public void testCarbyMinPrice(){
         Car minPrice = CarsList.stream().min(Comparator.comparing((Car car)-> car.getPrice())).get();
         System.out.println("\nMin Price Car "+minPrice.getMake()+" is "+minPrice.getPrice());
+        assertEquals(400000.0, minPrice.getPrice());
     }
 
     @Test
@@ -228,6 +236,7 @@ class CarTest {
     public void testCarbyMaxPrice(){
         Car maxPrice = CarsList.stream().max(Comparator.comparing((Car car)-> car.getPrice())).get();
         System.out.println("\nMax Price Car "+maxPrice.getMake()+" is "+maxPrice.getPrice());
+        assertEquals(3700000.0, maxPrice.getPrice());
     }
 
     @Test
@@ -235,6 +244,7 @@ class CarTest {
     public void testCarbyMinYear(){
         Car minYear = CarsList.stream().min(Comparator.comparing((Car car)-> car.getYear())).get();
         System.out.println("\nMin Year Car "+minYear.getMake()+" is "+minYear.getYear());
+        assertEquals(2017, minYear.getYear());
     }
 
     @Test
@@ -242,6 +252,7 @@ class CarTest {
     public void testCarbyMaxYear(){
         Car maxYear = CarsList.stream().max(Comparator.comparing((Car car)-> car.getYear())).get();
         System.out.println("\nMax Year Car "+maxYear.getMake()+" is "+maxYear.getYear());
+        assertEquals(2027, maxYear.getYear());
     }
 
     @Test
@@ -249,6 +260,7 @@ class CarTest {
     public void testCarbyMinMileage(){
         Car minMileage = CarsList.stream().min(Comparator.comparing((Car car)-> car.getMileage())).get();
         System.out.println("\nMin Mileage Car "+minMileage.getMake()+" is "+minMileage.getMileage());
+        assertEquals(10,minMileage.getMileage());
     }
 
     @Test
@@ -256,17 +268,54 @@ class CarTest {
     public void testCarbyMaxMileage(){
         Car maxMileage = CarsList.stream().max(Comparator.comparing((Car car)-> car.getMileage())).get();
         System.out.println("\nMax Price Car "+maxMileage.getMake()+" is "+maxMileage.getMileage());
+        assertEquals(80,maxMileage.getMileage());
     }
 
     @Test
     @Order(24)
-    public void testCarbyCountingValues(){
+    public void testCarbyMinDomination(){
+        Car minDom = CarsList.stream().min(Comparator.comparing((Car car)-> car.getDominationCount())).get();
+        System.out.println("\nMin Domination Car "+minDom.getMake()+" is "+minDom.getDominationCount());
+        assertEquals(0,minDom.getDominationCount());
+    }
 
-        long countPrice = CarsList.stream()
-                .filter((Car car)-> car.getPrice()>600000)
-                .count();
+    @Test
+    @Order(25)
+    public void testCarbyMaxDomination(){
+        Car maxDom = CarsList.stream().max(Comparator.comparing((Car car)-> car.getDominationCount())).get();
+        System.out.println("\nMax Domination Car "+maxDom.getMake()+" is "+maxDom.getDominationCount());
+        assertEquals(7,maxDom.getDominationCount());
+    }
+
+
+    //Using count() method for each sorting policy group
+
+    @Test
+    @Order(26)
+    public void testCarbyCountingValuesForPrice(){
+        long countPrice = CarsList.stream().filter((Car car)-> car.getPrice()>600000).count();
         System.out.println("\nNumber of cars having price > 600000: "+countPrice);
         assertEquals(7,countPrice);
-
+    }
+    @Test
+    @Order(27)
+    public void testCarbyCountingValuesForYear(){
+        long countYear = CarsList.stream().filter((Car car)-> car.getYear()>2020).count();
+        System.out.println("\nNumber of cars having year > 2020: "+countYear);
+        assertEquals(4,countYear);
+    }
+    @Test
+    @Order(28)
+    public void testCarbyCountingValuesForMileage(){
+        long countMileage = CarsList.stream().filter((Car car)-> car.getMileage()>40).count();
+        System.out.println("\nNumber of cars having mileage > 40: "+countMileage);
+        assertEquals(5,countMileage);
+    }
+    @Test
+    @Order(29)
+    public void testCarbyCountingValuesForDomination(){
+        long countDom = CarsList.stream().filter((Car car)-> car.getDominationCount()>4).count();
+        System.out.println("\nNumber of cars having domination > 4: "+countDom);
+        assertEquals(3,countDom);
     }
 }
