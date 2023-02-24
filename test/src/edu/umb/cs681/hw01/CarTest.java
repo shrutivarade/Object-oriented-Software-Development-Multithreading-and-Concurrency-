@@ -4,6 +4,8 @@ import org.junit.jupiter.api.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CarTest {
 
@@ -11,17 +13,16 @@ class CarTest {
     static ArrayList<Car> CarsList = new ArrayList<Car>();
     @BeforeAll
     static void setValues(){
-        CarsList.add(new Car("Hyundai", "A7", 10,2023, 400000));
-        CarsList.add(new Car("Mercedes","B65", 20,2022, 510000));
-        CarsList.add(new Car("Ferrari","R44", 30,2021, 620000));
-        CarsList.add(new Car("Honda","GT5", 40,2020, 730000));
-        CarsList.add(new Car("Tesla_Y", "Y", 50,2019, 800000));
-        CarsList.add(new Car("Tesla_X", "X", 55,2018, 850000));
-        CarsList.add(new Car("Jaguar","XJ", 60,2018, 910000));
-        CarsList.add(new Car("BMW","X3", 70,2027, 1200000));
-        CarsList.add(new Car("Volkswagen","Atlas", 80,2017, 3700000));
+        CarsList.add(new Car("Hyundai", "A7", 10,2023, 4000));
+        CarsList.add(new Car("Mercedes","B65", 20,2022, 5100));
+        CarsList.add(new Car("Ferrari","R44", 30,2021, 6200));
+        CarsList.add(new Car("Honda","GT5", 40,2020, 7300));
+        CarsList.add(new Car("Tesla_Y", "Y", 50,2019, 8000));
+        CarsList.add(new Car("Tesla_X", "X", 55,2018, 8500));
+        CarsList.add(new Car("Jaguar","XJ", 60,2018, 9100));
+        CarsList.add(new Car("BMW","X3", 70,2027, 12000));
+        CarsList.add(new Car("Volkswagen","Atlas", 80,2017, 37000));
     }
-
 
     //Price Sorting Policy
 
@@ -151,129 +152,178 @@ class CarTest {
     //Partition Cars based on price
     @Test
     @Order(9)
-    public void testCarBySeparatingHighPriceCars(){
-//        Map<Boolean, List<Car>> highPrice = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getPrice()>700000));
-//        System.out.println("\nPartitioning High priced cars having price > 700000 : "+highPrice);
+    public void testCarByPartitioningBasedOnPrice(){
 
-
-        /*Map<Boolean, List<Car>> highLowPrices = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getPrice()>700000));
-
-        List<Car> highPrices = highLowPrices.get(true);
-        List<Car> lowPrices = highLowPrices.get(false);
-
-        List<String> highPriceMake = highPrices.stream().map(Car::getMake).collect(Collectors.toList());
-        List<String> lowPriceMake = lowPrices.stream().map(Car::getMake).collect(Collectors.toList());
-
-        System.out.println("True: "+highPriceMake);
-        System.out.println("False: "+lowPriceMake);*/
-
-//        highPrices.stream().map(Car::getMake).forEach(System.out::println);
-//        lowPrices.stream().map(Car::getMake).forEach(System.out::println);
-
-        /*Car minPriceMake = lowPrices.stream().min(Comparator.comparing(Car::getPrice)).get();
-        String min = minPriceMake.getMake();
-        System.out.println("Min: "+minPriceMake.getMake());
-
-        Car maxPriceMake = lowPrices.stream().max(Comparator.comparing(Car::getPrice)).get();
-        System.out.println("Max price for car less than 700000: "+maxPriceMake.getMake());
-*/
-
-
-        Map<Boolean, List<Car>> partitionBasedOnPrices = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getPrice()>750000));
+        Map<Boolean, List<Car>> partitionBasedOnPrices = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getPrice()>7500));
 
         List<String> highPricedCars = partitionBasedOnPrices.get(true).stream().map(Car::getMake).collect(Collectors.toList());
-        System.out.println("\nHigh prices cars:"+highPricedCars);
+        System.out.println("\nHigh prices cars having price more than $7500: "+highPricedCars);
 //        partitionBasedOnPrices.get(true).stream().map(Car::getMake).forEach(System.out::println);
 
-        DoubleSummaryStatistics summaryForHighPricedcCars = partitionBasedOnPrices.get(true).stream().mapToDouble(Car::getPrice).summaryStatistics();
+        DoubleSummaryStatistics summaryForHighPricedCars = partitionBasedOnPrices.get(true).stream().mapToDouble(Car::getPrice).summaryStatistics();
 
-        System.out.println("Minimum value for high priced cars:"+summaryForHighPricedcCars.getMin());
-        System.out.println("Maximum value for high priced cars:"+summaryForHighPricedcCars.getMax());
-        System.out.println("Average value for high priced cars:"+summaryForHighPricedcCars.getAverage());
-        System.out.println("No of for high priced cars:"+summaryForHighPricedcCars.getCount());
+        System.out.println("Minimum value for high priced cars: $"+summaryForHighPricedCars.getMin());
+        System.out.println("Maximum value for high priced cars: $"+summaryForHighPricedCars.getMax());
+        System.out.println("Average value for high priced cars: $"+summaryForHighPricedCars.getAverage());
+        System.out.println("No of for high priced cars: "+summaryForHighPricedCars.getCount());
+
+        assertEquals(8000.0,summaryForHighPricedCars.getMin());
+        assertEquals(37000.0,summaryForHighPricedCars.getMax());
+        assertEquals(14920.0, summaryForHighPricedCars.getAverage());
+        assertEquals(5,summaryForHighPricedCars.getCount());
 
 
         List<String> lowPricedCars = partitionBasedOnPrices.get(false).stream().map(Car::getMake).collect(Collectors.toList());
-        System.out.println("\nLow prices cars:"+lowPricedCars);
+        System.out.println("\nLow prices cars having price less than $7500: "+lowPricedCars);
 //        partitionBasedOnPrices.get(false).stream().map(Car::getMake).forEach(System.out::println);
 
-        DoubleSummaryStatistics summaryForLowPricedcCars = partitionBasedOnPrices.get(false).stream().mapToDouble(Car::getPrice).summaryStatistics();
+        DoubleSummaryStatistics summaryForLowPricedCars = partitionBasedOnPrices.get(false).stream().mapToDouble(Car::getPrice).summaryStatistics();
 
-        System.out.println("Minimum value for low priced cars:"+summaryForLowPricedcCars.getMin());
-        System.out.println("Maximum value for low priced cars:"+summaryForLowPricedcCars.getMax());
-        System.out.println("Average value for low priced cars:"+summaryForLowPricedcCars.getAverage());
-        System.out.println("No of for low priced cars:"+summaryForLowPricedcCars.getCount());
+        System.out.println("Minimum value for low priced cars: $"+summaryForLowPricedCars.getMin());
+        System.out.println("Maximum value for low priced cars: $"+summaryForLowPricedCars.getMax());
+        System.out.println("Average value for low priced cars: $"+summaryForLowPricedCars.getAverage());
+        System.out.println("No of for low priced cars: "+summaryForLowPricedCars.getCount());
 
-
-
-
-
-
-//        Car minValueForHighPricedCars = partitionBasedOnPrices.get(true).stream().min(Comparator.comparing(Car::getPrice)).get();
-//        Car maxValueForHighPricedCars = partitionBasedOnPrices.get(true).stream().max(Comparator.comparing(Car::getPrice)).get();
-//        long countHighPricedCars = partitionBasedOnPrices.get(true).stream().count();
-
-
-
-
-
+        assertEquals(8000.0,summaryForHighPricedCars.getMin());
+        assertEquals(37000.0,summaryForHighPricedCars.getMax());
+        assertEquals(14920.0, summaryForHighPricedCars.getAverage());
+        assertEquals(5,summaryForHighPricedCars.getCount());
 
     }
 
-    /*@Test
-    @Order(10)
-    public void testCarBySeparatingLowPriceCars(){
-        Map<Boolean, List<Car>> lowPrice = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getPrice()<500000));
-        System.out.println("\nPartitioning Low Priced Cars having price < 500000: "+lowPrice);
-    }*/
 
+    //Partition Cars based on year
+    @Test
+    @Order(10)
+    public void testCarByPartitioningBasedOnYear(){
+
+        Map<Boolean, List<Car>> partitionBasedOnYear = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getYear()>2020));
+
+        List<String> highYearCars = partitionBasedOnYear.get(true).stream().map(Car::getMake).collect(Collectors.toList());
+        System.out.println("\nHigh year cars having value more than 2020: "+highYearCars);
+
+        IntSummaryStatistics summaryForHighYearCars = partitionBasedOnYear.get(true).stream().mapToInt(Car::getYear).summaryStatistics();
+
+        System.out.println("Minimum value for high year cars: "+summaryForHighYearCars.getMin());
+        System.out.println("Maximum value for high year cars: "+summaryForHighYearCars.getMax());
+        System.out.println("Average value for high year cars: "+(int)summaryForHighYearCars.getAverage());
+        System.out.println("No of for high year cars: "+summaryForHighYearCars.getCount());
+
+        assertEquals(2021,summaryForHighYearCars.getMin());
+        assertEquals(2027,summaryForHighYearCars.getMax());
+        assertEquals(2023, (int)summaryForHighYearCars.getAverage());
+        assertEquals(4,summaryForHighYearCars.getCount());
+
+
+        List<String> lowYearCars = partitionBasedOnYear.get(false).stream().map(Car::getMake).collect(Collectors.toList());
+        System.out.println("\nLow year cars having value less than 2020: "+lowYearCars);
+
+        IntSummaryStatistics summaryForLowYearCars = partitionBasedOnYear.get(false).stream().mapToInt(Car::getYear).summaryStatistics();
+
+        System.out.println("Minimum value for low year cars: $"+summaryForLowYearCars.getMin());
+        System.out.println("Maximum value for low year cars: $"+summaryForLowYearCars.getMax());
+        System.out.println("Average value for low year cars: $"+(int)summaryForLowYearCars.getAverage());
+        System.out.println("No of for low year cars: "+summaryForLowYearCars.getCount());
+
+        assertEquals(2017,summaryForLowYearCars.getMin());
+        assertEquals(2020,summaryForLowYearCars.getMax());
+        assertEquals(2018, (int)summaryForLowYearCars.getAverage());
+        assertEquals(5,summaryForLowYearCars.getCount());
+
+    }
+
+
+    //Partition Cars based on mileage
     @Test
     @Order(11)
-    public void testCarBySeparatingNewCars(){
-        Map<Boolean, List<Car>> newCars = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getYear()>2020));
-        System.out.println("\nPartitioning New cars having year > 2020 : "+newCars);
+    public void testCarByPartitioningBasedOnMileage(){
+
+        Map<Boolean, List<Car>> partitionBasedOnMileage = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getMileage()>40));
+
+        List<String> highMileageCars = partitionBasedOnMileage.get(true).stream().map(Car::getMake).collect(Collectors.toList());
+        System.out.println("\nHigh Mileage cars having Mileage more than 40: "+highMileageCars);
+
+        DoubleSummaryStatistics summaryForHighMileageCars = partitionBasedOnMileage.get(true).stream().mapToDouble(Car::getMileage).summaryStatistics();
+
+        System.out.println("Minimum value for high Mileage cars: "+summaryForHighMileageCars.getMin());
+        System.out.println("Maximum value for high Mileage cars: "+summaryForHighMileageCars.getMax());
+        System.out.println("Average value for high Mileage cars: "+summaryForHighMileageCars.getAverage());
+        System.out.println("No of for high Mileage cars: "+summaryForHighMileageCars.getCount());
+
+        assertEquals(50.0,summaryForHighMileageCars.getMin());
+        assertEquals(80.0,summaryForHighMileageCars.getMax());
+        assertEquals(63.0, summaryForHighMileageCars.getAverage());
+        assertEquals(5,summaryForHighMileageCars.getCount());
+
+
+        List<String> lowMileageCars = partitionBasedOnMileage.get(false).stream().map(Car::getMake).collect(Collectors.toList());
+        System.out.println("\nLow Mileage cars having Mileage less than 40: "+lowMileageCars);
+
+        DoubleSummaryStatistics summaryForLowMileageCars = partitionBasedOnMileage.get(false).stream().mapToDouble(Car::getMileage).summaryStatistics();
+
+        System.out.println("Minimum value for low Mileage cars: "+summaryForLowMileageCars.getMin());
+        System.out.println("Maximum value for low Mileage cars: "+summaryForLowMileageCars.getMax());
+        System.out.println("Average value for low Mileage cars: "+summaryForLowMileageCars.getAverage());
+        System.out.println("No of for low Mileage cars: "+summaryForLowMileageCars.getCount());
+
+        assertEquals(10.0,summaryForLowMileageCars.getMin());
+        assertEquals(40.0,summaryForLowMileageCars.getMax());
+        assertEquals(25.0, summaryForLowMileageCars.getAverage());
+        assertEquals(4,summaryForLowMileageCars.getCount());
+
     }
 
-    /*@Test
+
+    //Partition Cars based on price
+    @Test
     @Order(12)
-    public void testCarBySeparatingOldCars(){
-        Map<Boolean, List<Car>> oldCars = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getYear()<=2020), (Car car)->car.getMake());
-        System.out.println("\nPartitioning Older Cars having year <= 2020: "+oldCars);
-    }*/
+    public void testCarByPartitioningBasedOnDomination(){
 
-    @Test
-    @Order(13)
-    public void testCarBySeparatingHighMileage(){
-        Map<Boolean, List<Car>> highMileage = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getMileage()>40));
-        System.out.println("\nPartitioning High Mileage Cars having mileage > 40 : "+highMileage);
+        CarsList.forEach((Car car) -> {
+            car.setDominationCount(CarsList);
+        });
+
+        Map<Boolean, List<Car>> partitionBasedOnDomination = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getDominationCount()>4));
+
+        List<String> highDominationCars = partitionBasedOnDomination.get(true).stream().map(Car::getMake).collect(Collectors.toList());
+        System.out.println("\nHigh prices cars having value more than 4: "+highDominationCars);
+//        partitionBasedOnPrices.get(true).stream().map(Car::getMake).forEach(System.out::println);
+
+        IntSummaryStatistics summaryForHighDominationCars = partitionBasedOnDomination.get(true).stream().mapToInt(Car::getDominationCount).summaryStatistics();
+
+        System.out.println("Minimum value for high Domination cars: "+summaryForHighDominationCars.getMin());
+        System.out.println("Maximum value for high Domination cars: "+summaryForHighDominationCars.getMax());
+        System.out.println("Average value for high Domination cars: "+(int)summaryForHighDominationCars.getAverage());
+        System.out.println("No of for high Domination cars: "+summaryForHighDominationCars.getCount());
+
+        assertEquals(5,summaryForHighDominationCars.getMin());
+        assertEquals(7,summaryForHighDominationCars.getMax());
+        assertEquals(6, (int)summaryForHighDominationCars.getAverage());
+        assertEquals(3,summaryForHighDominationCars.getCount());
+
+
+        List<String> lowDominationCars = partitionBasedOnDomination.get(false).stream().map(Car::getMake).collect(Collectors.toList());
+        System.out.println("\nLow Domination cars having Domination less than 4: "+lowDominationCars);
+//        partitionBasedOnPrices.get(false).stream().map(Car::getMake).forEach(System.out::println);
+
+        IntSummaryStatistics summaryForLowDominationCars = partitionBasedOnDomination.get(false).stream().mapToInt(Car::getDominationCount).summaryStatistics();
+
+        System.out.println("Minimum value for low Domination cars: "+summaryForLowDominationCars.getMin());
+        System.out.println("Maximum value for low Domination cars: "+summaryForLowDominationCars.getMax());
+        System.out.println("Average value for low Domination cars: "+(int)summaryForLowDominationCars.getAverage());
+        System.out.println("No of for low Domination cars: "+summaryForLowDominationCars.getCount());
+
+        assertEquals(0,summaryForLowDominationCars.getMin());
+        assertEquals(4,summaryForLowDominationCars.getMax());
+        assertEquals(1, (int)summaryForLowDominationCars.getAverage());
+        assertEquals(6,summaryForLowDominationCars.getCount());
+
     }
-
-    /*@Test
-    @Order(14)
-    public void testCarBySeparatingLowMileage(){
-        Map<Boolean, List<Car>> lowMileage = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getMileage()<=40));
-        System.out.println("\nPartitioning Low Mileage Cars having mileage <= 40: "+lowMileage);
-    }*/
-
-    @Test
-    @Order(15)
-    public void testCarBySeparatingHighDomination(){
-        Map<Boolean, List<Car>> highDom = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getDominationCount()>4));
-        System.out.println("\nPartitioning High Domination cars having Domination > 700000 : "+highDom);
-    }
-
-    /*@Test
-    @Order(16)
-    public void testCarBySeparatingLowDomination(){
-        Map<Boolean, List<Car>> lowDom = CarsList.stream().collect(Collectors.partitioningBy((Car car) -> car.getDominationCount()<=4));
-        System.out.println("\nPartitioning Low Domination Cars having Domination < 500000: "+lowDom);
-    }*/
-
 
     //Averaging the price of each group of cars Using groupingBy
 
     @Test
-    @Order(17)
+    @Order(13)
     public void testCarbyAveragingValues(){
         Map<String, Double> groupavgPriceByMaker = CarsList.stream()
                 .collect(Collectors.groupingBy((Car car) -> car.getMake(), Collectors.averagingDouble((Car car)-> car.getPrice())));
@@ -282,24 +332,24 @@ class CarTest {
 
     //Min and Max Values for each sorting policy groups
 
-    /*@Test
-    @Order(18)
+    @Test
+    @Order(14)
     public void testCarbyMinPrice(){
         Car minPrice = CarsList.stream().min(Comparator.comparing((Car car)-> car.getPrice())).get();
         System.out.println("\nMin Price Car "+minPrice.getMake()+" is "+minPrice.getPrice());
-        assertEquals(400000.0, minPrice.getPrice());
+        assertEquals(4000.0, minPrice.getPrice());
     }
 
     @Test
-    @Order(19)
+    @Order(15)
     public void testCarbyMaxPrice(){
         Car maxPrice = CarsList.stream().max(Comparator.comparing((Car car)-> car.getPrice())).get();
         System.out.println("\nMax Price Car "+maxPrice.getMake()+" is "+maxPrice.getPrice());
-        assertEquals(3700000.0, maxPrice.getPrice());
+        assertEquals(37000.0, maxPrice.getPrice());
     }
 
     @Test
-    @Order(20)
+    @Order(16)
     public void testCarbyMinYear(){
         Car minYear = CarsList.stream().min(Comparator.comparing((Car car)-> car.getYear())).get();
         System.out.println("\nMin Year Car "+minYear.getMake()+" is "+minYear.getYear());
@@ -307,7 +357,7 @@ class CarTest {
     }
 
     @Test
-    @Order(21)
+    @Order(17)
     public void testCarbyMaxYear(){
         Car maxYear = CarsList.stream().max(Comparator.comparing((Car car)-> car.getYear())).get();
         System.out.println("\nMax Year Car "+maxYear.getMake()+" is "+maxYear.getYear());
@@ -315,7 +365,7 @@ class CarTest {
     }
 
     @Test
-    @Order(22)
+    @Order(18)
     public void testCarbyMinMileage(){
         Car minMileage = CarsList.stream().min(Comparator.comparing((Car car)-> car.getMileage())).get();
         System.out.println("\nMin Mileage Car "+minMileage.getMake()+" is "+minMileage.getMileage());
@@ -323,7 +373,7 @@ class CarTest {
     }
 
     @Test
-    @Order(23)
+    @Order(19)
     public void testCarbyMaxMileage(){
         Car maxMileage = CarsList.stream().max(Comparator.comparing((Car car)-> car.getMileage())).get();
         System.out.println("\nMax Price Car "+maxMileage.getMake()+" is "+maxMileage.getMileage());
@@ -331,7 +381,7 @@ class CarTest {
     }
 
     @Test
-    @Order(24)
+    @Order(20)
     public void testCarbyMinDomination(){
         Car minDom = CarsList.stream().min(Comparator.comparing((Car car)-> car.getDominationCount())).get();
         System.out.println("\nMin Domination Car "+minDom.getMake()+" is "+minDom.getDominationCount());
@@ -339,7 +389,7 @@ class CarTest {
     }
 
     @Test
-    @Order(25)
+    @Order(21)
     public void testCarbyMaxDomination(){
         Car maxDom = CarsList.stream().max(Comparator.comparing((Car car)-> car.getDominationCount())).get();
         System.out.println("\nMax Domination Car "+maxDom.getMake()+" is "+maxDom.getDominationCount());
@@ -350,31 +400,31 @@ class CarTest {
     //Using count() method for each sorting policy group
 
     @Test
-    @Order(26)
+    @Order(22)
     public void testCarbyCountingValuesForPrice(){
-        long countPrice = CarsList.stream().filter((Car car)-> car.getPrice()>600000).count();
-        System.out.println("\nNumber of cars having price > 600000: "+countPrice);
+        long countPrice = CarsList.stream().filter((Car car)-> car.getPrice()>6000).count();
+        System.out.println("\nNumber of cars having price > 6000: "+countPrice);
         assertEquals(7,countPrice);
     }
     @Test
-    @Order(27)
+    @Order(23)
     public void testCarbyCountingValuesForYear(){
         long countYear = CarsList.stream().filter((Car car)-> car.getYear()>2020).count();
         System.out.println("\nNumber of cars having year > 2020: "+countYear);
         assertEquals(4,countYear);
     }
     @Test
-    @Order(28)
+    @Order(24)
     public void testCarbyCountingValuesForMileage(){
         long countMileage = CarsList.stream().filter((Car car)-> car.getMileage()>40).count();
         System.out.println("\nNumber of cars having mileage > 40: "+countMileage);
         assertEquals(5,countMileage);
     }
     @Test
-    @Order(29)
+    @Order(25)
     public void testCarbyCountingValuesForDomination(){
         long countDom = CarsList.stream().filter((Car car)-> car.getDominationCount()>4).count();
         System.out.println("\nNumber of cars having domination > 4: "+countDom);
         assertEquals(3,countDom);
-    }*/
+    }
 }
