@@ -383,6 +383,11 @@ class CarTest {
     @Test
     @Order(20)
     public void testCarbyMinDomination(){
+
+        CarsList.forEach((Car car) -> {
+            car.setDominationCount(CarsList);
+        });
+
         Car minDom = CarsList.stream().min(Comparator.comparing((Car car)-> car.getDominationCount())).get();
         System.out.println("\nMin Domination Car "+minDom.getMake()+" is "+minDom.getDominationCount());
         assertEquals(0,minDom.getDominationCount());
@@ -391,6 +396,11 @@ class CarTest {
     @Test
     @Order(21)
     public void testCarbyMaxDomination(){
+
+        CarsList.forEach((Car car) -> {
+            car.setDominationCount(CarsList);
+        });
+
         Car maxDom = CarsList.stream().max(Comparator.comparing((Car car)-> car.getDominationCount())).get();
         System.out.println("\nMax Domination Car "+maxDom.getMake()+" is "+maxDom.getDominationCount());
         assertEquals(7,maxDom.getDominationCount());
@@ -423,6 +433,10 @@ class CarTest {
     @Test
     @Order(25)
     public void testCarbyCountingValuesForDomination(){
+
+        CarsList.forEach((Car car) -> {
+            car.setDominationCount(CarsList);
+        });
         long countDom = CarsList.stream().filter((Car car)-> car.getDominationCount()>4).count();
         System.out.println("\nNumber of cars having domination > 4: "+countDom);
         assertEquals(3,countDom);
