@@ -49,10 +49,10 @@ public class Housing {
                 .filter(h -> Integer.parseInt(h.get(3).replace("\"","")) == 1)
                 .map(h -> (h.get(13).replace("\"","")))
                 .collect(Collectors.toList());
-        System.out.println(medv);
+//        System.out.println(medv);
 
         //– Compute the highest, lowest and average price of those houses.
-        System.out.println("\nCompute the highest, lowest and average price of those houses.");
+        System.out.println("Compute the highest, lowest and average price of those houses.");
         DoubleSummaryStatistics summ_medv = medv.stream()
                 .mapToDouble(h -> Double.parseDouble(h.replace("\"","")))
                 .summaryStatistics();
@@ -67,15 +67,15 @@ public class Housing {
         List<List<String>> lowCrimeSorted = data.stream().sorted(Comparator.comparingDouble(h -> Double.parseDouble(h.get(0).replace("\"","")))).collect(Collectors.toList());
         double tenpercentCrime = (double) lowCrimeSorted.stream().count()*(0.1);
         List<List<String>> lowCrimeData = lowCrimeSorted.stream().limit((int)tenpercentCrime).collect(Collectors.toList());
-        System.out.println(lowCrimeData);
+//        System.out.println(lowCrimeData);
 
         List<List<String>> lowPTRSorted = lowCrimeData.stream().sorted(Comparator.comparingDouble(h -> Double.parseDouble(h.get(10).replace("\"","")))).collect(Collectors.toList());
         double tenpercentPTR = (double) lowPTRSorted.stream().count()*(0.1);
         List<List<String>> lowPTRData = lowPTRSorted.stream().limit((int)tenpercentPTR).collect(Collectors.toList());
-        System.out.println(lowPTRData);
+//        System.out.println(lowPTRData);
 
         //– Compute the max, min and average of: • Price • NOX concentration • # of rooms
-        System.out.println("\nCompute the max, min and average of: • Price • NOX concentration • # of rooms");
+        System.out.println("Compute the max, min and average of: • Price • NOX concentration • # of rooms");
         DoubleSummaryStatistics summ_Price = lowPTRData.stream()
                 .mapToDouble(h -> Double.parseDouble(h.get(13).replace("\"","")))
                 .summaryStatistics();
@@ -108,11 +108,11 @@ public class Housing {
                 .filter(h -> Double.parseDouble(h.get(7).replace("\"","")) < 5)
                 .map(h -> (h.get(7).replace("\"","")))
                 .collect(Collectors.toList());
-        System.out.println(dist);
+//        System.out.println(dist);
 
         //– Compute the count of those areas/blocks:
-        System.out.println("\nCompute the count of those areas/blocks:");
-        System.out.println(dist.stream().count());
+        System.out.println("Compute the count of those areas/blocks:");
+        System.out.println("\nCount:"+dist.stream().count());
 
 
         // Data Processing #4
@@ -121,10 +121,10 @@ public class Housing {
         System.out.println("\nPartition the areas/blocks in low and high categories depending upon tax.");
         Map<Boolean, List<List<String>>> lowTaxData = data.stream()
                 .collect(Collectors.partitioningBy(h -> Double.parseDouble(h.get(9).replace("\"","")) < 666));
-        System.out.println(lowTaxData);
+//        System.out.println(lowTaxData);
 
         // Compute the Summary statistics for low category data.
-        System.out.println("\nCompute the Summary statistics for low category data.");
+        System.out.println("Compute the Summary statistics for low category data.");
         DoubleSummaryStatistics tax = lowTaxData.get(true).stream()
                 .mapToDouble(h -> Double.parseDouble(h.get(5).replace("\"","")))
                 .summaryStatistics();

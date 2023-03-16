@@ -24,15 +24,15 @@ public class DataProcessing2 implements Runnable{
         List<List<String>> lowCrimeSorted = data.stream().sorted(Comparator.comparingDouble(h -> Double.parseDouble(h.get(0).replace("\"","")))).collect(Collectors.toList());
         double tenpercentCrime = (double) lowCrimeSorted.stream().count()*(0.1);
         List<List<String>> lowCrimeData = lowCrimeSorted.stream().limit((int)tenpercentCrime).collect(Collectors.toList());
-        System.out.println(lowCrimeData);
+//        System.out.println(lowCrimeData);
 
         List<List<String>> lowPTRSorted = lowCrimeData.stream().sorted(Comparator.comparingDouble(h -> Double.parseDouble(h.get(10).replace("\"","")))).collect(Collectors.toList());
         double tenpercentPTR = (double) lowPTRSorted.stream().count()*(0.1);
         List<List<String>> lowPTRData = lowPTRSorted.stream().limit((int)tenpercentPTR).collect(Collectors.toList());
-        System.out.println(lowPTRData);
+//        System.out.println(lowPTRData);
 
         //– Compute the max, min and average of: • Price • NOX concentration • # of rooms
-        System.out.println("\nCompute the max, min and average of: • Price • NOX concentration • # of rooms");
+        System.out.println("Compute the max, min and average of: • Price • NOX concentration • # of rooms");
         DoubleSummaryStatistics summ_Price = lowPTRData.stream()
                 .mapToDouble(h -> Double.parseDouble(h.get(13).replace("\"","")))
                 .summaryStatistics();

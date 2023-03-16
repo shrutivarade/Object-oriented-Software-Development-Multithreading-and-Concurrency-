@@ -26,10 +26,10 @@ public class DataProcessing4 implements Runnable{
         System.out.println("\nPartition the areas/blocks in low and high categories depending upon tax.");
         Map<Boolean, List<List<String>>> lowTaxData = data.stream()
                 .collect(Collectors.partitioningBy(h -> Double.parseDouble(h.get(9).replace("\"","")) < 666));
-        System.out.println(lowTaxData);
+//        System.out.println(lowTaxData);
 
         // Compute the Summary statistics for low category data.
-        System.out.println("\nCompute the Summary statistics for low category data.");
+        System.out.println("Compute the Summary statistics for low category data.");
         DoubleSummaryStatistics tax = lowTaxData.get(true).stream()
                 .mapToDouble(h -> Double.parseDouble(h.get(5).replace("\"","")))
                 .summaryStatistics();

@@ -24,11 +24,11 @@ public class DataProcessing3 implements Runnable{
                 .filter(h -> Double.parseDouble(h.get(7).replace("\"","")) < 5)
                 .map(h -> (h.get(7).replace("\"","")))
                 .collect(Collectors.toList());
-        System.out.println(dist);
+//        System.out.println(dist);
 
         //– Compute the count of those areas/blocks:
-        System.out.println("\nCompute the count of those areas/blocks:");
-        System.out.println(dist.stream().count());
+        System.out.println("Compute the count of those areas/blocks:");
+        System.out.println("\nCount:"+dist.stream().count());
 
 
     }

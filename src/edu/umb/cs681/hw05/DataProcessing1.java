@@ -24,10 +24,10 @@ public class DataProcessing1 implements Runnable{
                 .filter(h -> Integer.parseInt(h.get(3).replace("\"","")) == 1)
                 .map(h -> (h.get(13).replace("\"","")))
                 .collect(Collectors.toList());
-        System.out.println(medv);
+//        System.out.println(medv);
 
         //– Compute the highest, lowest and average price of those houses.
-        System.out.println("\nCompute the highest, lowest and average price of those houses.");
+        System.out.println("Compute the highest, lowest and average price of those houses.");
         DoubleSummaryStatistics summ_medv = medv.stream()
                 .mapToDouble(h -> Double.parseDouble(h.replace("\"","")))
                 .summaryStatistics();

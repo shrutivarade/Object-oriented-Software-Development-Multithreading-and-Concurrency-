@@ -32,7 +32,7 @@ public class Housing {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         DataProcessing1 dp1 = new DataProcessing1();
         DataProcessing2 dp2 = new DataProcessing2();
         DataProcessing3 dp3 = new DataProcessing3();
@@ -44,17 +44,21 @@ public class Housing {
         Thread t4 = new Thread(dp4);
 
         t1.start();
+        t1.join();
         t2.start();
+        t2.join();
         t3.start();
+        t3.join();
         t4.start();
+        t4.join();
 
-        try{
+        /*try{
             t1.join();
             t2.join();
             t3.join();
             t4.join();
 
-        }catch (InterruptedException e){}
+        }catch (InterruptedException e){}*/
 
     }
 }
