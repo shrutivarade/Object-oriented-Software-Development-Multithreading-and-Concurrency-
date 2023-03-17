@@ -10,6 +10,7 @@ public class DJIAkWkSummaryObservable extends Observable<WkSummary>{
 
     // Collection of DailySummary:
      public List<DSummary> dSumm = new LinkedList<DSummary>();
+     WkSummary week;
 
     // Add a daily summary to the collection.
     public void addSummary(DSummary dSummary){
@@ -28,7 +29,7 @@ public class DJIAkWkSummaryObservable extends Observable<WkSummary>{
 
 //            System.out.println(dSumm);
 
-            WkSummary week = new WkSummary(
+             week = new WkSummary(
                     dSumm.get(4).getOpen(),
                     dSumm.get(0).getClose(),
                     dSumm.stream().map((DSummary d)-> d.getHigh()).max(Double::compare).get(),
@@ -44,10 +45,10 @@ public class DJIAkWkSummaryObservable extends Observable<WkSummary>{
 //            dSumm.forEach(System.out::println);
 
         }
-
-
-
     }
 
+    public WkSummary wksumm(){
+        return week;
+    }
 
 }
