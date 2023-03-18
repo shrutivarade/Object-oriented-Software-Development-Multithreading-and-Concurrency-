@@ -38,7 +38,7 @@ public class DJIAkWkSummaryObservable extends Observable<WkSummary>{
 
             notifyObservers(week);
 
-//            clearObservers();
+            dSumm.clear();
 
 //            System.out.println("\n"+week+"\n");
 //            dSumm.forEach(System.out::println);
