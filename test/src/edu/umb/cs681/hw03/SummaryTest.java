@@ -3,6 +3,7 @@ package src.edu.umb.cs681.hw03;
 import edu.umb.cs681.hw03.CandleStickObserver;
 import edu.umb.cs681.hw03.DJIAkWkSummaryObservable;
 import edu.umb.cs681.hw03.DSummary;
+import edu.umb.cs681.hw03.WkSummary;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -13,6 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class SummaryTest {
@@ -76,6 +79,20 @@ class SummaryTest {
         djiaObj.addSummary(day4);
         djiaObj.addSummary(day5);
 
+        double week_o = 33887.39;
+        double week_c = 33826.69;
+        double week_h = 34331.47;
+        double week_l = 33517.73;
+
+        WkSummary wk = djiaObj.wksumm();
+
+        assertEquals(week_o, wk.getOpen());
+
+        assertEquals(week_c, wk.getClose());
+
+        assertEquals(week_h, wk.getHigh());
+
+        assertEquals(week_l, wk.getLow());
 
 
     }
