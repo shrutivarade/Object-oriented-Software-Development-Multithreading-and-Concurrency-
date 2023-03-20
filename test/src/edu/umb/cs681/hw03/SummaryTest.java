@@ -1,4 +1,4 @@
-package src.edu.umb.cs681.hw03;
+package edu.umb.cs681.hw03;
 
 import edu.umb.cs681.hw03.CandleStickObserver;
 import edu.umb.cs681.hw03.DJIAkWkSummaryObservable;
