@@ -63,7 +63,7 @@
     </target>-->
 
     <target name="run" depends="compile">
-        <java classname="edu.umb.cs681.primes/hw06_2"
+        <java classname="edu.umb.cs681.primes.hw06_2.RunnableCancellablePrimeFactorizer"
               classpathref="classpath"
               fork="true"/>
     </target>
