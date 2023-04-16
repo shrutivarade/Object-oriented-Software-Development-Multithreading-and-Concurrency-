@@ -52,5 +52,5 @@ public class RunnableCancellablePrimeGenerator extends RunnablePrimeGenerator {
 		}
 		gen.getPrimes().forEach( (Long prime)-> System.out.print(prime + ", ") );
 		System.out.println("\n" + gen.getPrimes().size() + " prime numbers are found.");
-	}
+ 	}
 }
