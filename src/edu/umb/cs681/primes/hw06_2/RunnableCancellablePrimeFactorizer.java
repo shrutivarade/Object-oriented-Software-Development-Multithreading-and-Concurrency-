@@ -28,6 +28,12 @@ public class RunnableCancellablePrimeFactorizer extends RunnablePrimeFactorizer{
 
             lock.lock();
             try{
+                // Stop generating prime factors if done==true
+                if(done){
+                    System.out.println("Stopped generating prime factors.");
+                    this.factors.clear();
+                    break;
+                }
                 if(dividend % divisor == 0) {
                     factors.add(divisor);
                     dividend /= divisor;
