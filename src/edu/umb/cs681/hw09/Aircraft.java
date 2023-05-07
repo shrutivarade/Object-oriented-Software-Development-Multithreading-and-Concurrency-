@@ -6,15 +6,7 @@ public class Aircraft {
     private Position position;
     private ReentrantLock lock = new ReentrantLock();
     public Aircraft(Position pos){
-        lock.lock();
-        try{
-            this.position = pos;
-
-        }
-        finally {
-            lock.unlock();
-        }
-
+        this.position = pos;
     }
 
     public void setPosition(double newLat, double newLong, double newAlt){
