@@ -9,13 +9,17 @@ public class RunnableFileSystem implements Runnable{
     }
 
     public static void main(String[] args) {
-        RunnableFileSystem rfs = new RunnableFileSystem();
+        RunnableFileSystem rfs1 = new RunnableFileSystem();
+        RunnableFileSystem rfs2 = new RunnableFileSystem();
+        RunnableFileSystem rfs3 = new RunnableFileSystem();
+        RunnableFileSystem rfs4 = new RunnableFileSystem();
+        RunnableFileSystem rfs5 = new RunnableFileSystem();
 
-        Thread t1 = new Thread(rfs);
-        Thread t2 = new Thread(rfs);
-        Thread t3 = new Thread(rfs);
-        Thread t4 = new Thread(rfs);
-        Thread t5 = new Thread(rfs);
+        Thread t1 = new Thread(rfs1);
+        Thread t2 = new Thread(rfs2);
+        Thread t3 = new Thread(rfs3);
+        Thread t4 = new Thread(rfs4);
+        Thread t5 = new Thread(rfs5);
 
         t1.start();
         t2.start();
