@@ -52,12 +52,17 @@ public class RunnableCancellablePrimeFactorizer extends RunnablePrimeFactorizer{
         }
     }
 
+    public void run() {
+        generatePrimeFactors();
+        System.out.println("Thread #" + Thread.currentThread().threadId() + " generated " + factors);
+    }
+
 
     public static void main(String[] args) {
 
         // Factorization of 36 with a separate thread
         System.out.println("Factorization of 36");
-        edu.umb.cs681.hw08.RunnableCancellablePrimeFactorizer fact = new edu.umb.cs681.hw08.RunnableCancellablePrimeFactorizer(36, 2, (long)Math.sqrt(36));
+        RunnableCancellablePrimeFactorizer fact = new RunnableCancellablePrimeFactorizer(36, 2, (long)Math.sqrt(36));
         Thread thread = new Thread(fact);
         System.out.println("Thread #" + thread.threadId() +
                 " performs factorization in the range of " + fact.getFrom() + "->" + fact.getTo());
