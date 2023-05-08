@@ -4,7 +4,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class RunnableCancellablePrimeFactorizer extends RunnablePrimeFactorizer{
 
-    private boolean done = false;
+    private boolean done = false; //added flag variable done
     private ReentrantLock lock = new ReentrantLock();
 
     public RunnableCancellablePrimeFactorizer(long dividend, long from, long to) {
@@ -12,7 +12,7 @@ public class RunnableCancellablePrimeFactorizer extends RunnablePrimeFactorizer{
     }
 
     public void setDone(){
-        lock.lock();
+        lock.lock(); //added reentrantLock to guard the shared variable 'done'
         try{
             done = true;
         }
@@ -22,7 +22,7 @@ public class RunnableCancellablePrimeFactorizer extends RunnablePrimeFactorizer{
 
     }
 
-    public void generatePrimeFactors() {
+    public void generatePrimeFactors() { //revised prime generator
         long divisor = 2;
         while( dividend != 1 && divisor <= to ){
 
@@ -51,6 +51,29 @@ public class RunnableCancellablePrimeFactorizer extends RunnablePrimeFactorizer{
 
         }
     }
+
+
+    public static void main(String[] args) {
+
+        // Factorization of 36 with a separate thread
+        System.out.println("Factorization of 36");
+        edu.umb.cs681.hw08.RunnableCancellablePrimeFactorizer fact = new edu.umb.cs681.hw08.RunnableCancellablePrimeFactorizer(36, 2, (long)Math.sqrt(36));
+        Thread thread = new Thread(fact);
+        System.out.println("Thread #" + thread.threadId() +
+                " performs factorization in the range of " + fact.getFrom() + "->" + fact.getTo());
+        thread.start();
+        fact.setDone();
+        try{
+            thread.join();
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        System.out.println("Final result: " + fact.getPrimeFactors() + "\n");
+
+
+    }
+
+
 
 
 

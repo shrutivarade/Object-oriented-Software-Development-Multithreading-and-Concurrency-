@@ -4,12 +4,12 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class RunnableCancellablePrimeGenerator extends RunnablePrimeGenerator {
 	private boolean done = false;
-	private ReentrantLock lock = new ReentrantLock();
+	private ReentrantLock lock = new ReentrantLock(); // Added the reentrantLock as a data field to gaurd the shared variable 'done'
 	public RunnableCancellablePrimeGenerator(long from, long to) {
 		super(from, to);
 	}
 	
-	public void setDone(){
+	public void setDone(){ //revise setDone()
 		lock.lock();
 		try{
 			done = true;
@@ -20,7 +20,7 @@ public class RunnableCancellablePrimeGenerator extends RunnablePrimeGenerator {
 
 	}
 
-	public void generatePrimes(){
+	public void generatePrimes(){ //revised generatePrime() to access 'done' with the lock
 		for (long n = from; n <= to; n++) {
 
 			lock.lock();
@@ -38,6 +38,10 @@ public class RunnableCancellablePrimeGenerator extends RunnablePrimeGenerator {
 			}
 
 		}
+	}
+
+	public void run() {
+		generatePrimes();
 	}
 
 	public static void main(String[] args) {
