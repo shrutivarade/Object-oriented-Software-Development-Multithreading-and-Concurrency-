@@ -50,6 +50,11 @@ public class RunnableCancellableInterruptiblePrimeFactorizer extends RunnableCan
         }
     }
 
+    public void run() {
+        generatePrimeFactors();
+        System.out.println("Thread #" + Thread.currentThread().threadId() + " generated " + factors);
+    }
+
 
     public static void main(String[] args) {
         // Factorization of 36 with a separate thread
