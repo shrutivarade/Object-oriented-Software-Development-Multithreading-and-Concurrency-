@@ -5,10 +5,11 @@ public class RunnableFileSystem implements Runnable{
 
     @Override
     public void run() {
-        System.out.println(FileSystem.getFileSystem());
+        System.out.println("Hashcode for the filesystem instance: "+FileSystem.getFileSystem().hashCode());
     }
 
     public static void main(String[] args) {
+        System.out.println("Singleton File System:\n");
         RunnableFileSystem rfs1 = new RunnableFileSystem();
         RunnableFileSystem rfs2 = new RunnableFileSystem();
         RunnableFileSystem rfs3 = new RunnableFileSystem();
