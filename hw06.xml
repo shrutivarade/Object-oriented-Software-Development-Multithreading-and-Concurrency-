@@ -36,9 +36,19 @@
             <include name="edu/umb/cs681/primes/hw06_1/*.java"/>
             <!-- include name="edu/umb/cs680/junit5intro/SecurityContext.java"/-->
         </javac>
+        <javac srcdir="${src}" destdir="${bin}" includeAntRuntime="no">
+            <classpath refid="classpath"/>
+            <include name="edu/umb/cs681/primes/hw06_2/*.java"/>
+            <!-- include name="edu/umb/cs680/junit5intro/SecurityContext.java"/-->
+        </javac>
         <javac srcdir="${test.src}" destdir="${test.bin}" includeAntRuntime="no">
             <classpath refid="classpath"/>
             <include name="edu/umb/cs681/primes/hw06_1/*.java"/>
+            <!-- include name="edu/umb/cs680/junit5intro/SecurityContextTest.java"/-->
+        </javac>
+        <javac srcdir="${test.src}" destdir="${test.bin}" includeAntRuntime="no">
+            <classpath refid="classpath"/>
+            <include name="edu/umb/cs681/primes/hw06_2/*.java"/>
             <!-- include name="edu/umb/cs680/junit5intro/SecurityContextTest.java"/-->
         </javac>
     </target>
@@ -64,6 +74,9 @@
 
     <target name="run" depends="compile">
         <java classname="edu.umb.cs681.primes.hw06_1.RunnableCancellablePrimeGenerator"
+              classpathref="classpath"
+              fork="true"/>
+        <java classname="edu.umb.cs681.primes.hw06_2.RunnableCancellablePrimeFactorizer"
               classpathref="classpath"
               fork="true"/>
     </target>
