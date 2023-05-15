@@ -132,4 +132,3 @@ This prevents the thread from getting stuck in a deadlock while waiting for the 
 
 Overall, this version of Spotify is designed to be safe for use in a multi-threaded environment, preventing potential deadlocks and ensuring that threads can access the playlist without interfering with one another.
 
-
