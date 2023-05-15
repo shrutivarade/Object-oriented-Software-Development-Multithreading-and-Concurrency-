@@ -34,6 +34,7 @@ public class Housing {
 
     public static void main(String[] args) {
 
+        System.out.println("Housing Data sequentially:");
 
         //Read/parse the CSV file and
         Path path = Paths.get("bos-housing.csv");
