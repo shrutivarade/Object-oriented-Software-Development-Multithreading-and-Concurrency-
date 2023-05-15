@@ -1,6 +1,5 @@
 package edu.umb.cs681.hw12;
 
-
 import java.time.Duration;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;

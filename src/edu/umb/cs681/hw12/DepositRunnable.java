@@ -13,7 +13,6 @@ public class DepositRunnable implements Runnable{
 		flagAtomic.set(true);
 	}
 
-	
 	public DepositRunnable(BankAccount account) {
 		this.account = account;
 	}

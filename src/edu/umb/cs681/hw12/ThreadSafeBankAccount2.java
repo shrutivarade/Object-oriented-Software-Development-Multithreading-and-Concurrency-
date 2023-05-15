@@ -1,7 +1,5 @@
 package edu.umb.cs681.hw12;
 
-
-
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
