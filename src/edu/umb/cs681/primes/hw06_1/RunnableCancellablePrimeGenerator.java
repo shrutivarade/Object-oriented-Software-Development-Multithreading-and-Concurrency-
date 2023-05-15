@@ -21,6 +21,8 @@ public class RunnableCancellablePrimeGenerator extends RunnablePrimeGenerator {
 	}
 
 	public void generatePrimes(){ //revised generatePrime() to access 'done' with the lock
+
+		System.out.println("Starts generating prime numbers:");
 		for (long n = from; n <= to; n++) {
 
 			lock.lock();

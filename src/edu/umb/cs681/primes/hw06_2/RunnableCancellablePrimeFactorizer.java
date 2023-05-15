@@ -60,6 +60,8 @@ public class RunnableCancellablePrimeFactorizer extends RunnablePrimeFactorizer{
 
     public static void main(String[] args) {
 
+        System.out.println("\nStarts generating prime Factors:");
+
         // Factorization of 36 with a separate thread
         System.out.println("Factorization of 36");
         RunnableCancellablePrimeFactorizer fact = new RunnableCancellablePrimeFactorizer(36, 2, (long)Math.sqrt(36));
