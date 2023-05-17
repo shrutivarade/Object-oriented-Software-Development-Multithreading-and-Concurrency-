@@ -28,13 +28,17 @@ public class AccessCounter {
     }
 
     public void increment (Path path){
-        files.compute(path, (Path k, AtomicInteger v) -> v == null ? new AtomicInteger(1) : new AtomicInteger(v.get() + 1));
+        files.compute(path, (Path k, AtomicInteger v) -> {
+            return v == null ? new AtomicInteger(1) : new AtomicInteger(v.incrementAndGet());
+        });
     }
 
 
 
     public int getCount(Path path) {
-        return files.get(path)==null? 0 : files.get(path).get();
+        return files.compute(path, (Path k, AtomicInteger v) -> {
+            return v == null ? new AtomicInteger(0) : new AtomicInteger(v.get());
+        }).get();
     }
 
 
