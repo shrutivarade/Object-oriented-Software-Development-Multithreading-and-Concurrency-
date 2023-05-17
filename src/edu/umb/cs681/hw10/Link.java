@@ -7,7 +7,7 @@ public class Link extends FSElement {
 
     private FSElement target;
 
-    protected ReentrantLock lock = new ReentrantLock();
+//    protected ReentrantLock lock = new ReentrantLock();
 
     public Link(Directory parent, String name, int size, LocalDateTime creationTime, FSElement target) {
         super(parent, name, size, creationTime);

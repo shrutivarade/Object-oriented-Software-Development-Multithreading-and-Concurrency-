@@ -10,17 +10,26 @@ class EntranceHandler implements Runnable{
         this.monitor = monitor;
     }
 
-    private AtomicBoolean flagAtomic = new AtomicBoolean(true);
+    private AtomicBoolean flagAtomic = new AtomicBoolean(false);
     public void setFlagAtomic() {
-        flagAtomic.set(false);
+        flagAtomic.set(true);
     }
 
 
     @Override
     public void run() {
-        while (flagAtomic.get()){
-            monitor.enter();
+        while (true){
+            try{
+                if(flagAtomic.get()){
+                    System.out.println(Thread.currentThread().threadId()+" : "+"Stop Accessing AdmissionMonitor by flag based termination");
+                    break;
+                }
+                monitor.enter();
+                Thread.sleep(Duration.ofSeconds(1));
+            } catch (InterruptedException e) {
+                System.out.println(e.toString());
+                continue;
+            }
         }
-
     }
 }

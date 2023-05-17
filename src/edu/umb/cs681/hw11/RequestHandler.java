@@ -26,10 +26,10 @@ public class RequestHandler implements Runnable{
     private static final Random rand = new Random();
     public void handleRequests() {
         while (true) {
-
             lock.lock();
             try {
                 if (flagAtomic.get()) {
+                    System.out.println("Stop Accessing files by flag based termination");
                     break;
                 }
                 Path file = files[rand.nextInt(files.length)];
@@ -55,7 +55,7 @@ public class RequestHandler implements Runnable{
                 lock.unlock();
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             }catch(InterruptedException e) {
                 System.out.println(e.toString());
                 continue;

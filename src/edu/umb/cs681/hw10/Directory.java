@@ -10,7 +10,6 @@ public class Directory extends FSElement {
     public LinkedList<Directory> SubDirectories = new LinkedList<>();
     public LinkedList<File> Files = new LinkedList<>();
     public int totalSize;
-    protected ReentrantLock lock = new ReentrantLock();
 
     public Directory(Directory parent, String name, int size, LocalDateTime creationTime) { //constructor
         super(parent, name, 0, creationTime);

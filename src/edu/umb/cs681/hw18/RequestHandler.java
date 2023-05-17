@@ -39,16 +39,6 @@ public class RequestHandler implements Runnable{
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
-                //                counter.increment(Paths.get("/Users/shrutiv/JAVA/CS681-OOSD/src/edu/umb/cs681/hw11/a.html"));
-                //                countA = counter.getCount(Paths.get("/Users/shrutiv/JAVA/CS681-OOSD/src/edu/umb/cs681/hw11/a.html"));
-                //                System.out.println("countA: "+countA);
-                //
-                //                counter.increment(Path.of("b.html"));
-                //                countB = counter.getCount(Path.of("b.html"));
-                //                System.out.println("countB: "+countB);
-                //
-                //                countC = counter.getCount(Path.of("c.html"));
-                //                System.out.println("countB: "+countC);
             }
             finally{
                 lock.unlock();

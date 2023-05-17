@@ -1,16 +1,15 @@
 package edu.umb.cs681.hw18;
 
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class AccessCounter {
 
     private static AccessCounter accesscounter = null;
-    private ConcurrentHashMap<Path,Integer> files = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Path, AtomicInteger> files = new ConcurrentHashMap<>();
     private static ReentrantLock sLock = new ReentrantLock();
-//    private ReentrantLock lock = new ReentrantLock();
 
     private AccessCounter(){
 
@@ -29,20 +28,13 @@ public class AccessCounter {
     }
 
     public void increment (Path path){
-        if (files.containsKey(path)) {
-            files.put(path, files.get(path) + 1);
-        } else {
-            files.put(path, 1);
-        }
+        files.compute(path, (Path k, AtomicInteger v) -> v == null ? new AtomicInteger(1) : new AtomicInteger(v.get() + 1));
     }
 
+
+
     public int getCount(Path path) {
-        if(files.containsKey(path)){
-            return files.get(path);
-        }
-        else{
-            return 0;
-        }
+        return files.get(path)==null? 0 : files.get(path).get();
     }
 
 

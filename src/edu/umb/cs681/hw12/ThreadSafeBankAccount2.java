@@ -28,8 +28,9 @@ public class ThreadSafeBankAccount2 implements BankAccount {
 			sufficientFundsCondition.signalAll();
 		}
 		catch (InterruptedException exception){
-//			exception.printStackTrace();
+			exception.printStackTrace();
 		}
+
 		finally{
 			lock.unlock();
 			System.out.println("DEPOSIT Lock released");
@@ -54,7 +55,7 @@ public class ThreadSafeBankAccount2 implements BankAccount {
 			belowUpperLimitFundsCondition.signalAll();
 		}
 		catch (InterruptedException exception){
-//			exception.printStackTrace();
+			exception.printStackTrace();
 		}
 		finally{
 			lock.unlock();
@@ -72,16 +73,11 @@ public class ThreadSafeBankAccount2 implements BankAccount {
 			Thread t1 = new Thread( dep );
 			t1.start();
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(6000);
 			} catch (InterruptedException e) {
 			}
 			dep.setFlagAtomic();
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			}
 			t1.interrupt();
-			System.out.println(t1.threadId()+" Is Interrupted: "+t1.isInterrupted());
 
 
 			WithdrawRunnable with = new WithdrawRunnable(bankAccount);
@@ -92,12 +88,7 @@ public class ThreadSafeBankAccount2 implements BankAccount {
 			} catch (InterruptedException e) {
 			}
 			with.setFlagAtomic();
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			}
 			t2.interrupt();
-			System.out.println(t2.threadId()+" Is Interrupted: "+t2.isInterrupted());
 
 
 		}

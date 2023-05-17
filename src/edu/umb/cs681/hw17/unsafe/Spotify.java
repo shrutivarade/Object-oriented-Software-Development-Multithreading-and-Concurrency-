@@ -31,14 +31,11 @@ class Spotify {
     public void next() {
         lock.writeLock().lock();
         try {
-            if(currentIndex>=playlist.size()-1){
+            while(currentIndex>=playlist.size()-1){
                 System.out.println("Waiting for playlist to get reset...");
             }
-            else {
-                currentIndex++;
-                System.out.println("Thread " + Thread.currentThread() + " next: " + playlist.get(currentIndex));
-            }
-
+            currentIndex++;
+            System.out.println("Thread " + Thread.currentThread() + " next: " + playlist.get(currentIndex));
         } finally {
             lock.writeLock().unlock();
         }
@@ -77,7 +74,7 @@ class Spotify {
     public void reset() {
         lock.writeLock().lock();
         try{
-            while(currentIndex >= playlist.size()-1){
+            if(currentIndex >= playlist.size()-1){
                 System.out.println("Resetting currentIndex to 0");
                 currentIndex = 0;
             }

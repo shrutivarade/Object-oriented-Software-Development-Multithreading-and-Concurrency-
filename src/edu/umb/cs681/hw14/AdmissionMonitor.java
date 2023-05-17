@@ -69,14 +69,13 @@ class AdmissionMonitor{
 
         t1.start();
         try {
-            Thread.sleep(11);
+            Thread.sleep(10000);
         }catch(InterruptedException e) {
             System.out.println(e.toString());
         }
-
         t2.start();
         try {
-            Thread.sleep(1);
+            Thread.sleep(5000);
         }catch(InterruptedException e) {
             System.out.println(e.toString());
         }
@@ -88,10 +87,15 @@ class AdmissionMonitor{
 
         t3.start();
         try {
-            Thread.sleep(1);
+            Thread.sleep(1000);
         }catch(InterruptedException e) {
             System.out.println(e.toString());
         }
+
+        entrance.setFlagAtomic();
+        t1.interrupt();
+        exit.setFlagAtomic();
+        t2.interrupt();
         stats.setFlagAtomic();
         t3.interrupt();
 

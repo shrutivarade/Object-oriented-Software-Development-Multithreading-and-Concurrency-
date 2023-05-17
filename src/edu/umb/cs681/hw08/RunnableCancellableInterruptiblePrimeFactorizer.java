@@ -5,50 +5,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class RunnableCancellableInterruptiblePrimeFactorizer extends RunnableCancellablePrimeFactorizer{
 
-
-    private boolean done = false;
-
-    private final ReentrantLock lock = new ReentrantLock();
-
     public RunnableCancellableInterruptiblePrimeFactorizer(long dividend, long from, long to) {
         super(dividend, from, to);
     }
 
-    public void generatePrimeFactors() {
-        long divisor = 2;
-        while( dividend != 1 && divisor <= to ){
 
-            lock.lock();
-            try{
-                // Stop generating prime factors if done==true
-                if(done){
-                    System.out.println("Stopped generating prime factors.");
-                    this.factors.clear();
-                    break;
-                }
-                if(dividend % divisor == 0) {
-                    factors.add(divisor);
-                    dividend /= divisor;
-                }else {
-                    if (divisor == 2) {
-                        divisor++;
-                    } else {
-                        divisor += 2;
-                    }
-                }
-            }
-            finally {
-                lock.unlock();
-            }
-            try {
-                Thread.sleep(1000);
-            }catch(InterruptedException e) {
-                System.out.println(e.toString());
-                continue;
-            }
-
-        }
-    }
 
     public void run() {
         generatePrimeFactors();
@@ -64,13 +25,9 @@ public class RunnableCancellableInterruptiblePrimeFactorizer extends RunnableCan
         System.out.println("Thread #" + thread1.threadId() +
                 " performs factorization in the range of " + runnable1.getFrom() + "->" + runnable1.getTo());
         thread1.start();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         runnable1.setDone();
         thread1.interrupt();
+        System.out.println("Is "+thread1.threadId()+" Interrupted: "+thread1.isInterrupted());
         try {
             thread1.join();
         } catch (InterruptedException e) {
@@ -85,13 +42,9 @@ public class RunnableCancellableInterruptiblePrimeFactorizer extends RunnableCan
         System.out.println("Thread #" + thread2.threadId() +
                 " performs factorization in the range of " + runnable2.getFrom() + "->" + runnable2.getTo());
         thread2.start();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         runnable2.setDone();
         thread2.interrupt();
+        System.out.println("Is "+thread2.threadId()+" Interrupted: "+thread2.isInterrupted());
         try {
             thread2.join();
         } catch (InterruptedException e) {
