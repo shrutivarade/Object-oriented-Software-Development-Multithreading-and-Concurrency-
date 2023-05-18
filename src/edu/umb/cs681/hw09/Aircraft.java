@@ -13,7 +13,7 @@ public class Aircraft {
         lock.lock();
         try{
             this.position = this.position.change(newLat, newLong, newAlt);
-            System.out.println("Set Latitude:"+this.position.latitude());
+            System.out.println("\nSet Latitude:"+this.position.latitude());
             System.out.println("Set Longitude:"+this.position.longitude());
             System.out.println("Set Altitude:"+this.position.altitude());
         }
@@ -25,7 +25,7 @@ public class Aircraft {
     public Position getPosition(){
         lock.lock();
         try{
-            System.out.println("Get Latitude:"+this.position.latitude());
+            System.out.println("\nGet Latitude:"+this.position.latitude());
             System.out.println("Get Longitude:"+this.position.longitude());
             System.out.println("Get Altitude:"+this.position.altitude());
             return position;

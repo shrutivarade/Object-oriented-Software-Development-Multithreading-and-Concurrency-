@@ -31,8 +31,26 @@ public class RunnableAircraft extends Aircraft {
         });
 
         t1.start();
+        try{
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e){
+            System.out.println(e.toString());
+        }
         t2.start();
+        try{
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e){
+            System.out.println(e.toString());
+        }
         t3.start();
+        try{
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e){
+            System.out.println(e.toString());
+        }
     }
 }
 
