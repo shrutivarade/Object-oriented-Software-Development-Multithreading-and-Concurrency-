@@ -10,6 +10,6 @@ public class TableObserver implements Observer<StockEvent> {
         event.ticker();
         event.quote();
         System.out.println("getTicker: "+event.ticker()+" "+"getQuote: "+event.quote());
-        System.out.println("Observable: "+sender+" Events: "+event);
+        System.out.println("TableObservable: "+sender+" Events: "+event);
     }
 }

@@ -8,6 +8,10 @@ public class DataHandler implements Runnable{
     Observer updateQuoteTableChart =  (sender, event) -> System.out.println("StockEvent Table Updated");
     Observer updateQuoteThreeDOChart =  (sender, event) -> System.out.println("StockEvent ThreeDO Updated");
 
+    LineChartObserver lco = new LineChartObserver();
+    TableObserver to = new TableObserver();
+    ThreeDObserver tdo = new ThreeDObserver();
+
 
 
 
@@ -16,7 +20,11 @@ public class DataHandler implements Runnable{
         obs.addObserver(updateQuoteLineChart);
         obs.addObserver(updateQuoteTableChart);
         obs.addObserver(updateQuoteThreeDOChart);
-        obs.changeQuote("umass", 5463);
+        obs.changeQuote("abc", 2222);
+        obs.addObserver(lco);
+        obs.addObserver(to);
+        obs.addObserver(tdo);
+        obs.changeQuote("xyz", 5463);
     }
 
     public static void main(String[] args) {
@@ -25,9 +33,6 @@ public class DataHandler implements Runnable{
             new Thread(new DataHandler()).start();
         }
 
-//        DataHandler data1 = new DataHandler();
-//        Thread t1 = new Thread(data1);
-//        t1.start();
 
     }
 }

@@ -36,7 +36,7 @@ public abstract class Observable<T> {
 		finally {
 			lockObs.unlock();
 		}
-		observersLocal.forEach( (observer)->{observer .update(this, event);} );
+		observersLocal.forEach( (observer)->{observer.update(this, event);} );
 
 	}
 	
