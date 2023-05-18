@@ -92,10 +92,6 @@ class AdmissionMonitor{
             System.out.println(e.toString());
         }
 
-        entrance.setFlagAtomic();
-        t1.interrupt();
-        exit.setFlagAtomic();
-        t2.interrupt();
         stats.setFlagAtomic();
         t3.interrupt();
 
