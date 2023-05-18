@@ -28,8 +28,10 @@ public class ThreadSafeBankAccount2 implements BankAccount {
 			sufficientFundsCondition.signalAll();
 		}
 		catch (InterruptedException exception){
-			exception.printStackTrace();
+//			exception.printStackTrace();
+			System.out.println(exception.toString());
 		}
+
 
 		finally{
 			lock.unlock();
