@@ -36,21 +36,21 @@
             <include name="edu/umb/cs681/hw17/safe/*.java"/>
             <!-- include name="edu/umb/cs680/junit5intro/SecurityContext.java"/-->
         </javac>
-        <javac srcdir="${src}" destdir="${bin}" includeAntRuntime="no">
-            <classpath refid="classpath"/>
-            <include name="edu/umb/cs681/hw17/unsafe/*.java"/>
-            <!-- include name="edu/umb/cs680/junit5intro/SecurityContext.java"/-->
-        </javac>
+<!--        <javac srcdir="${src}" destdir="${bin}" includeAntRuntime="no">-->
+<!--            <classpath refid="classpath"/>-->
+<!--            <include name="edu/umb/cs681/hw17/unsafe/*.java"/>-->
+<!--            &lt;!&ndash; include name="edu/umb/cs680/junit5intro/SecurityContext.java"/&ndash;&gt;-->
+<!--        </javac>-->
         <javac srcdir="${test.src}" destdir="${test.bin}" includeAntRuntime="no">
             <classpath refid="classpath"/>
             <include name="edu/umb/cs681/hw17/safe/*.java"/>
             <!-- include name="edu/umb/cs680/junit5intro/SecurityContextTest.java"/-->
         </javac>
-        <javac srcdir="${test.src}" destdir="${test.bin}" includeAntRuntime="no">
-            <classpath refid="classpath"/>
-            <include name="edu/umb/cs681/hw17/unsafe/*.java"/>
-            <!-- include name="edu/umb/cs680/junit5intro/SecurityContextTest.java"/-->
-        </javac>
+<!--        <javac srcdir="${test.src}" destdir="${test.bin}" includeAntRuntime="no">-->
+<!--            <classpath refid="classpath"/>-->
+<!--            <include name="edu/umb/cs681/hw17/unsafe/*.java"/>-->
+<!--            &lt;!&ndash; include name="edu/umb/cs680/junit5intro/SecurityContextTest.java"/&ndash;&gt;-->
+<!--        </javac>-->
     </target>
 
     <!--<target name="test" depends="compile">
@@ -73,9 +73,9 @@
     </target>-->
 
     <target name="run" depends="compile">
-        <java classname="edu.umb.cs681.hw17.unsafe.main"
-              classpathref="classpath"
-              fork="true"/>
+<!--        <java classname="edu.umb.cs681.hw17.unsafe.main"-->
+<!--              classpathref="classpath"-->
+<!--              fork="true"/>-->
         <java classname="edu.umb.cs681.hw17.safe.main"
               classpathref="classpath"
               fork="true"/>
