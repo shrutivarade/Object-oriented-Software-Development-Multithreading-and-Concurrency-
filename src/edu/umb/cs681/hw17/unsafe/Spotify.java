@@ -6,7 +6,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 class Spotify {
-    protected List<String> playlist = new ArrayList<>();
+    private List<String> playlist = new ArrayList<>();
     public int currentIndex = 0;
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
@@ -34,8 +34,8 @@ class Spotify {
             while(currentIndex>=playlist.size()-1){
                 System.out.println("Waiting for playlist to get reset...");
             }
-            currentIndex++;
-            System.out.println("Thread " + Thread.currentThread() + " next: " + playlist.get(currentIndex));
+                currentIndex++;
+                System.out.println("Thread " + Thread.currentThread() + " next: " + playlist.get(currentIndex));
         } finally {
             lock.writeLock().unlock();
         }
