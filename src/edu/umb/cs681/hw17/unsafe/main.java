@@ -18,15 +18,17 @@ class main {
         Thread laptopThread = new Thread(laptopController);
 
         bluetoothThread.start();
-        laptopThread.start();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(10);
         }
         catch (InterruptedException e){
             System.out.println(e.toString());
         }
         bluetoothController.setFlagAtomic();
         bluetoothThread.interrupt();
+
+        laptopThread.start();
+
         laptopController.setFlagAtomic();
         laptopThread.interrupt();
 

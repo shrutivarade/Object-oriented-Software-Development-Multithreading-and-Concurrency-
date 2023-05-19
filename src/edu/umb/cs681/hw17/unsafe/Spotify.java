@@ -6,7 +6,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 class Spotify {
-    private List<String> playlist = new ArrayList<>();
+    protected List<String> playlist = new ArrayList<>();
     public int currentIndex = 0;
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 

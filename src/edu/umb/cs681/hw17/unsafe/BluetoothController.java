@@ -18,7 +18,7 @@ class BluetoothController implements Runnable {
         if(flagAtomic.get()){
             return;
         }
-        while (!flagAtomic.get()){
+        while(spotify.currentIndex<=spotify.playlist.size()){
             spotify.play();
             spotify.next();
         }
