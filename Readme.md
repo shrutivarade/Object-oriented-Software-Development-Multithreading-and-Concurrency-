@@ -1,16 +1,16 @@
 
-### This is the Readme file for HW06:Primes, HW16:Race condition and HW17:Deadlock
+# This is the Readme file for HW06:Primes, HW16:Race condition and HW17:Deadlock
 
 
 
-HW06:
+## HW06:
 
 This HW is placed inside the package src.edu.umb.cs681.primes.hw06_1 and src.edu.umb.cs681.primes.hw06_2
 But only 1 xml file is used to execute both the main class for, HW06-1: RunnableCancellablePrimeGenerator and HW06-2: RunnableCancellablePrimeFactorize, i.e hw06.xml
 
 
 
-# HW16 : Race condition example for Spotify music player
+## HW16 : Race condition example for Spotify music player
 
 ## Spotify Music Player
 
@@ -77,7 +77,7 @@ The `Spotify` class uses the `ReentrantReadWriteLock` class to ensure that multi
 
 
 
-# HW17 : Deadlock example for Spotify music player
+## HW17 : Deadlock example for Spotify music player
 
 ## Spotify Music Player
 
