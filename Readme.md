@@ -42,14 +42,14 @@ This method sets the playlist of the music player.
 The shared variable is currentIndex and playlist.
 
 
-Unsafe Version : Race condition occurs
+## Unsafe Version : Race condition occurs
 
 The `Spotify` class in this implementation is not thread-safe.
 This is because multiple threads may modify the `currentIndex` variable simultaneously, which can lead to unpredictable behavior.
 Therefore, it is important to use the `Spotify` class carefully in a multi-threaded environment.
 If we need to use it in a thread-safe way, it is recommended to use a `ReentrantReadWriteLock` or another synchronization mechanism to ensure that multiple threads can control the music player safely.
 
-Safe Version : Race condition prevented
+## Safe Version : Race condition prevented
 
 ### `play()`
 It acquires a read lock on the `ReentrantReadWriteLock` object before reading the current track from the playlist.
@@ -116,12 +116,12 @@ This method acquires a write lock to ensure thread-safety.
 This method resets the current index to 0 if it is greater than or equal to the size of the playlist.
 This method acquires a write lock to ensure thread-safety.
 
-Unsafe Version : Deadlock occurs
+## Unsafe Version : Deadlock occurs
 
 The `Spotify` class uses a `ReentrantReadWriteLock` to ensure thread-safety, allowing multiple threads to read the playlist simultaneously, while allowing only one thread to write to the playlist at a time to avoid race conditions. But this code creats a deadlock issue. The deadlock issue in this scenario is that the `BluetoothController` thread is calling the `next()` method multiple times on the `Spotify` object without releasing the lock on the `ReentrantReadWriteLock` instance.Meanwhile, the `reset()` method of the `Spotify` class, which is called from the `LaptopController` thread, also requires the write lock on the same `ReentrantReadWriteLock` instance.
 If the `next()` method of `BluetoothController` is holding the write lock when `reset()` of `LaptopController` is called, the `reset()` method will not be able to acquire the write lock and will be blocked indefinitely, resulting in a deadlock.
 
-Safe Version : Deadlock Prevented
+## Safe Version : Deadlock Prevented
 
 This version of Spotify is designed to be deadlock-safe by using locks and conditions to prevent potential deadlocks that could occur in the unsafe version.
 The `Spotify` class uses a `ReentrantReadWriteLock` to allow multiple threads to read the playlist at the same time while ensuring that only one thread can write to the playlist at any given time.
