@@ -1,5 +1,5 @@
 
-###This is the Readme file for HW06:Primes, HW16:Race condition and HW17:Deadlock
+### This is the Readme file for HW06:Primes, HW16:Race condition and HW17:Deadlock
 
 
 
@@ -10,7 +10,7 @@ But only 1 xml file is used to execute both the main class for, HW06-1: Runnable
 
 
 
-HW16 : Race condition example for Spotify music player
+# HW16 : Race condition example for Spotify music player
 
 ## Spotify Music Player
 
@@ -77,7 +77,7 @@ The `Spotify` class uses the `ReentrantReadWriteLock` class to ensure that multi
 
 
 
-HW17 : Deadlock example for Spotify music player
+# HW17 : Deadlock example for Spotify music player
 
 ## Spotify Music Player
 
